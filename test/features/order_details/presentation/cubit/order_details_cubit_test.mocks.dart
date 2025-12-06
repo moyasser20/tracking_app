@@ -306,7 +306,7 @@ class MockApiClient extends _i1.Mock implements _i10.ApiClient {
   _i11.Future<_i7.OrdersListResponse> getOrders(
     String? bearerToken,
     int? limit, [
-    int? page = 1,
+    int? page = 8,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(

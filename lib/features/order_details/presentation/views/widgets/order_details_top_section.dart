@@ -5,6 +5,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import '../../../../../core/contants/app_icons.dart';
 import '../../../../../core/contants/app_images.dart';
+import '../../../../../core/routes/route_names.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/date_converter.dart';
 import '../../../data/models/order_details_model.dart';
@@ -82,16 +83,31 @@ class OrderDetailsTopSection extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 12,),
-        _AddressSection(
-          title: 'Pickup address',
-          address: order.pickupAddress,
-          isUser: false,
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.orderMapScreen,
+              arguments: {'order': order, 'isFromPickup': true},
+            );
+          },
+          child: _AddressSection(
+            title: 'Pickup address',
+            address: order.pickupAddress, isUser: false,
+          ),
         ),
-        SizedBox(height: 8,),
-        _AddressSection(title: 'User Address', address: address, isUser: true),
-        SizedBox(height: 8,),
-
+        SizedBox(height: 8),
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.orderMapScreen,
+              arguments: {'order': order, 'isFromPickup': false},
+            );
+          },
+          child: _AddressSection(title: 'User Address', address: address, isUser: true,),
+        ),
+        SizedBox(height:8),
       ],
     );
   }

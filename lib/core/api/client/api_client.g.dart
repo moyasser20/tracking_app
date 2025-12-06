@@ -340,7 +340,7 @@ class _ApiClient implements ApiClient {
   Future<OrdersListResponse> getOrders(
     String bearerToken,
     int limit, [
-    int page = 1,
+    int page = 8,
   ]) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
