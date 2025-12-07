@@ -55,13 +55,15 @@ class _CustomMessageWidgetState extends State<CustomMessageWidget>
   Widget build(BuildContext context) {
     const backgroundColor = Color(0xFFECFDF3);
 
-    final messageColor = widget.type == MessageType.success
-        ? const Color(0xFF008A2E)
-        : const Color(0xFFe50000);
+    final messageColor =
+        widget.type == MessageType.success
+            ? const Color(0xFF008A2E)
+            : const Color(0xFFe50000);
 
-    final icon = widget.type == MessageType.success
-        ? Icons.check_circle_outline_rounded
-        : Icons.error_rounded;
+    final icon =
+        widget.type == MessageType.success
+            ? Icons.check_circle_outline_rounded
+            : Icons.error_rounded;
 
     return FadeTransition(
       opacity: _opacityAnimation,
@@ -81,12 +83,14 @@ class _CustomMessageWidgetState extends State<CustomMessageWidget>
                 children: [
                   Icon(icon, color: messageColor),
                   const SizedBox(width: 10),
-                  Text(widget.message,
-                      style: TextStyle(
-                        color: messageColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      )),
+                  Text(
+                    widget.message,
+                    style: TextStyle(
+                      color: messageColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ],
               ),
             ),

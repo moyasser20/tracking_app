@@ -4,15 +4,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../theme/app_colors.dart';
 import 'custom_toast.dart';
+
 Future<void> showCustomSnackBar(
-    BuildContext context,
-    String? message,
-    {
-      bool isError = true,
-      bool isWarning = false,
-      bool showToaster = false
-    }
-    ) async {
+  BuildContext context,
+  String? message, {
+  bool isError = true,
+  bool isWarning = false,
+  bool showToaster = false,
+}) async {
   if (message == null || message.isEmpty) return;
 
   if (isWarning) {
@@ -51,9 +50,10 @@ Future<void> showCustomSnackBar(
         timeInSecForIosWeb: 1,
         backgroundColor: isError ? Colors.red : Colors.green,
         textColor: Colors.white,
-        fontAsset: message.toLowerCase().contains("sar")
-            ? "assets/font/sar-Regular.otf"
-            : null,
+        fontAsset:
+            message.toLowerCase().contains("sar")
+                ? "assets/font/sar-Regular.otf"
+                : null,
         fontSize: 12,
         webShowClose: true,
         webPosition: "left",
@@ -61,15 +61,17 @@ Future<void> showCustomSnackBar(
     } else {
       ScaffoldMessenger.of(context)
         ..clearSnackBars()
-        ..showSnackBar(SnackBar(
-          dismissDirection: DismissDirection.endToStart,
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          padding: EdgeInsets.zero,
-          content: CustomToast(text: message, isError: isError),
-          duration: const Duration(seconds: 2),
-          behavior: SnackBarBehavior.floating,
-        ));
+        ..showSnackBar(
+          SnackBar(
+            dismissDirection: DismissDirection.endToStart,
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            padding: EdgeInsets.zero,
+            content: CustomToast(text: message, isError: isError),
+            duration: const Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
     }
   }
 }

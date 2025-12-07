@@ -17,14 +17,19 @@ class AppTheme {
       ),
     ),
     textTheme: TextTheme(
-      headlineMedium: GoogleFonts.inter(
+      titleLarge: GoogleFonts.inter(
         fontSize: 20,
         fontWeight: FontWeight.w500,
         color: AppColors.black,
       ),
-      headlineSmall: GoogleFonts.inter(
+      headlineMedium: GoogleFonts.inter(
         fontSize: 20,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
+        color: AppColors.black,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
         color: AppColors.black,
       ),
       bodyLarge: GoogleFonts.inter(
@@ -43,8 +48,8 @@ class AppTheme {
         color: AppColors.black,
       ),
       displayMedium: GoogleFonts.inter(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
         color: AppColors.grey,
       ),
     ),

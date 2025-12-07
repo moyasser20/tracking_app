@@ -75,6 +75,8 @@ abstract class SecureStorage {
     StackTrace stackTrace, {
     String? key,
   }) {
-    log('SecureStorage $operation error${key != null ? " for key: $key" : ""}: $error');
+    log(
+      'SecureStorage $operation error${key != null ? " for key: $key" : ""}: $error',
+    );
   }
 }

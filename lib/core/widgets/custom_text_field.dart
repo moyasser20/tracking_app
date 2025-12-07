@@ -9,10 +9,11 @@ class CustomTextFormField extends StatefulWidget {
   final String? label;
   final String? hint;
   final String? suffixText;
-  final bool obscureText; // formerly isPassword
+  final bool obscureText;
   final TextInputType keyboardType;
   final bool enabled;
   final bool readonly;
+  final bool showUploadIcon;
   final String? initialText;
 
   const CustomTextFormField({
@@ -29,6 +30,7 @@ class CustomTextFormField extends StatefulWidget {
     this.enabled = true,
     this.readonly = false,
     this.initialText,
+    this.showUploadIcon = false,
   });
 
   @override
@@ -61,6 +63,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: _controller,
       enabled: widget.enabled,
       readOnly: widget.readonly,
+      onTap: widget.readonly ? (widget.onPressed) : null,
+      enableInteractiveSelection: widget.readonly ? false : true,
+      contextMenuBuilder:
+          widget.readonly
+              ? (context, editableTextState) {
+                return const SizedBox.shrink();
+              }
+              : null,
       obscureText: isTextObscured,
       keyboardType: widget.keyboardType,
       validator: widget.validator,
@@ -83,35 +93,43 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           fontWeight: FontWeight.w400,
         ),
         hintText: widget.hint,
-        hintStyle: TextStyle(
-          color: AppColors.grey.withValues(alpha: 0.5),
-        ),
-        suffixIcon: widget.obscureText
-            ? IconButton(
-                icon: Icon(
-                  isTextObscured ? Icons.visibility_off : Icons.visibility,
-                  color: AppColors.grey,
-                ),
-                onPressed: () {
-                  setState(() {
-                    isTextObscured = !isTextObscured;
-                  });
-                },
-              )
-            : null,
-        suffix: widget.suffixText != null
-            ? GestureDetector(
-                onTap: widget.onPressed ?? () {},
-                child: Text(
-                  widget.suffixText!,
-                  style: TextStyle(
-                    color: AppColors.pink,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
+        hintStyle: TextStyle(color: AppColors.grey.withValues(alpha: 0.5)),
+        suffixIcon:
+            widget.obscureText
+                ? IconButton(
+                  icon: Icon(
+                    isTextObscured ? Icons.visibility_off : Icons.visibility,
+                    color: AppColors.grey,
                   ),
-                ),
-              )
-            : null,
+                  onPressed: () {
+                    setState(() {
+                      isTextObscured = !isTextObscured;
+                    });
+                  },
+                )
+                : (widget.onPressed != null && widget.showUploadIcon
+                    ? IconButton(
+                      icon: Icon(
+                        Icons.file_upload_outlined,
+                        color: AppColors.pink,
+                      ),
+                      onPressed: widget.onPressed,
+                    )
+                    : null),
+        suffix:
+            widget.suffixText != null
+                ? GestureDetector(
+                  onTap: widget.onPressed ?? () {},
+                  child: Text(
+                    widget.suffixText!,
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                )
+                : null,
         border: const OutlineInputBorder(),
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.black),

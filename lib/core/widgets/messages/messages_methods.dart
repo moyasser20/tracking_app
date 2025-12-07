@@ -8,11 +8,12 @@ void showSuccessMessage(BuildContext context, String message) {
   late OverlayEntry entry;
 
   entry = OverlayEntry(
-    builder: (context) => CustomMessageWidget(
-      message: message,
-      type: MessageType.success,
-      entry: entry,
-    ),
+    builder:
+        (context) => CustomMessageWidget(
+          message: message,
+          type: MessageType.success,
+          entry: entry,
+        ),
   );
 
   overlay.insert(entry);
@@ -24,11 +25,12 @@ void showErrorMessage(BuildContext context, String message) {
   late OverlayEntry entry;
 
   entry = OverlayEntry(
-    builder: (context) => CustomMessageWidget(
-      message: message,
-      type: MessageType.error,
-      entry: entry,
-    ),
+    builder:
+        (context) => CustomMessageWidget(
+          message: message,
+          type: MessageType.error,
+          entry: entry,
+        ),
   );
 
   overlay.insert(entry);

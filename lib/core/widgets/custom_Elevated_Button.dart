@@ -4,13 +4,13 @@ import '../theme/app_colors.dart';
 class CustomElevatedButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
-  final Color? color; // Background color
-  final Color? textColor; // Text color
-  final Color? borderColor; // Outline/border color
-  final double borderRadius; // Border radius
-  final bool isLoading; // New loading flag
-  final double? width; // Custom width
-  final double? height; // Custom height
+  final Color? color;
+  final Color? textColor;
+  final Color? borderColor;
+  final double borderRadius;
+  final bool isLoading;
+  final double? width;
+  final double? height;
 
   const CustomElevatedButton({
     super.key,
@@ -27,14 +27,15 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
-      width: width ?? 373,
-      height: height ?? 52,
+      width: width ?? screenWidth * 0.4,
+      height: height ?? 48,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? AppColors.pink,
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
             side: BorderSide(
@@ -42,26 +43,29 @@ class CustomElevatedButton extends StatelessWidget {
               width: 1.5,
             ),
           ),
-          textStyle: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         ),
-        child: isLoading
-            ? const SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        child:
+            isLoading
+                ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+                : FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      color: textColor ?? AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                    ),
+                  ),
                 ),
-              )
-            : Text(
-                text,
-                style: TextStyle(
-                  color: textColor ?? AppColors.white,
-                ),
-              ),
       ),
     );
   }
